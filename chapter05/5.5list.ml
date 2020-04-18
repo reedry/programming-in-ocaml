@@ -70,3 +70,44 @@ let max_list = function
       [] -> mx
     | f :: r -> if f > mx then max_rec f r else max_rec mx r
     in max_rec first rest
+
+(* 5.3 *)
+(* 1 *)
+let rec mem s a = match s with
+  [] -> false
+| first :: rest ->
+    if first = a then true else mem rest a
+
+(* 2 *)
+let intersect s1 s2 = filter (mem s1) s2
+
+(* 3 *)
+let union s1 s2 =
+  let rec not_mem s a = match s with
+    [] -> true
+  | first :: rest -> if first = a then false else not_mem rest a
+  in
+  s1 @ (filter (not_mem s1) s2)
+
+(* 4 *)
+let diff s1 s2 =
+  let rec not_mem s a = match s with
+    [] -> true
+  | first :: rest -> if first = a then false else not_mem rest a
+  in
+  filter (not_mem s2) s1
+
+(* 5.4 *)
+(* map (fun x -> f (g x)) l *)
+
+(* 5.5 *)
+let rec fold_right f l e =
+  match l with
+    [] -> e
+  | x :: rest -> f x (fold_right f rest e)
+
+let concat_fold ll = fold_right (fun x a -> x @ a) ll []
+
+let forall_fold p l = fold_right (fun x b -> p x && b) l true
+
+let exists_fold p l = fold_right (fun x b -> p x || b) l false
