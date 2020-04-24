@@ -62,6 +62,9 @@ let overlap p q =
   | (({body = Point} as point), ({body = Rectangle _} as rect))
     | (({body = Rectangle _} as rect), ({body = Point} as point))
       -> overlap_point_rectangle point rect
+  | (({body = Point} as point), ({body = Square a} as sq))
+    | (({body = Square a} as sq), ({body = Point} as point))
+      -> overlap_point_rectangle point {sq with body = Rectangle (a, a)}
   | ({body = Circle r1}, {body = Circle r2})
       -> let r1_float = float_of_int r1 and r2_float = float_of_int r2 in
       distance p q -. r1_float -. r2_float < 0.
@@ -79,4 +82,3 @@ let overlap p q =
   | (({body = Circle _} as cir), ({body = Square a} as sq))
     | (({body = Square a} as sq), ({body = Circle _} as cir))
       -> overlap_circle_rectangle cir {sq with body = Rectangle (a, a)}
-  | (_, _) -> false
