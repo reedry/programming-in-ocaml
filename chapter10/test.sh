@@ -12,3 +12,6 @@ assert() {
 
 assert "cat cat.ml" "./ocamlcat cat.ml"
 assert "cat -n cat.ml" "./ocamlcat -n cat.ml"
+assert "fold fold.ml" "./ocamlfold fold.ml"
+assert "fold --width 2 fold.ml" "./ocamlfold --width 2 fold.ml"
+assert "fold --width 37 fold.ml" "./ocamlfold --width 37 fold.ml"
