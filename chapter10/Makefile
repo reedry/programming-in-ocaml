@@ -1,10 +1,13 @@
-all: ocamlcat ocamlfold
+all: bin/ocamlcat bin/ocamlfold bin/ocamlwc
 
-ocamlcat: cat.ml
-	ocamlc -o ocamlcat cat.ml
+bin/ocamlcat: cat.ml
+	ocamlc -o bin/ocamlcat cat.ml
 
-ocamlfold: fold.ml
-	ocamlc -o ocamlfold fold.ml
+bin/ocamlfold: fold.ml
+	ocamlc -o bin/ocamlfold fold.ml
 
-test: ocamlcat ocamlfold
+bin/ocamlwc: wc.ml
+	ocamlc -o bin/ocamlwc wc.ml
+
+test: bin/ocamlcat bin/ocamlfold bin/ocamlwc
 	./test.sh
