@@ -53,4 +53,8 @@ tags
 # Persistent undo
 [._]*.un~
 
+# Ignore binaries
+bin/
 
+# temporary files
+*.tmp
